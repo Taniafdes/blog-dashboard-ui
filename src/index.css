@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body  {
+  /* background: linear-gradient(#F4F0FF, #DACDFF); */
+  width: 100%;
+  min-height: 100vh;
+}
+
+.toggle {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+@media (max-width: 476px) {
+    .toggle {
+    flex-direction: column;
+    }
+}

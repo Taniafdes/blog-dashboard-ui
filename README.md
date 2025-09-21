@@ -1,0 +1,1 @@
+to run the project locally type npm start 
