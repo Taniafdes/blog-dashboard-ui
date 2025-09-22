@@ -1,0 +1,10 @@
+[build]
+  # Command to build your React app
+  command = "npm run build"
+  
+  # Folder to publish (CRA outputs here)
+  publish = "build"
+
+# Optional: Environment variables (example Node version)
+[build.environment]
+  NODE_VERSION = "18"
