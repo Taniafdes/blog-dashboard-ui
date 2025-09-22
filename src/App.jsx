@@ -20,8 +20,10 @@ function App() {
       <CssBaseline />
       <ToggleComponent mode={mode} setMode={setMode} />
       <MainLayout>
+        
         {/* Job Table Component, the main Table */}
         <JobTableComponent />
+
       </MainLayout>
     </ThemeProvider>
   );

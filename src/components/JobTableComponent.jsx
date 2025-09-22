@@ -8,6 +8,7 @@ import { Button, Box } from "@mui/material";
 import EditPostComponent from "./EditPostComponent";
 import DeleteDialogComponent from "./DeleteDialogComponent";
 
+// Initial dummy posts (used if localStorage is empty)
 const initialPosts = [
   {
     id: 1,
@@ -28,28 +29,38 @@ const initialPosts = [
 ];
 
 function JobTableComponent() {
-
+  // State to hold all blog posts
+  // Initialize from localStorage if available, otherwise use initialPosts
   const [posts, setPosts] = useState(() => {
     const saved = localStorage.getItem("blogPosts");
     return saved ? JSON.parse(saved) : initialPosts;
   });
 
-
+  // State for search input
   const [search, setSearch] = useState("");
+
+  // State for currently selected post (for edit or delete)
   const [selectedPost, setSelectedPost] = useState(null);
+
+  // State to control edit dialog visibility
   const [openDialog, setOpenDialog] = useState(false);
+
+  // State to control delete confirmation dialog visibility
   const [openDelete, setOpenDelete] = useState(false);
 
+  // posts to localStorage whenever posts state changes
   useEffect(() => {
     localStorage.setItem("blogPosts", JSON.stringify(posts));
   }, [posts]);
 
+  // Filter posts based on search input (title or author)
   const filteredPosts = posts.filter(
     (p) =>
       p.title.toLowerCase().includes(search.toLowerCase()) ||
       p.author.toLowerCase().includes(search.toLowerCase())
   );
 
+  // Define columns for the DataGrid
   const columns = [
     { field: "title", headerName: "Title", width: 200, sortable: true },
     { field: "author", headerName: "Author", width: 150 },
@@ -57,26 +68,30 @@ function JobTableComponent() {
     { field: "date", headerName: "Date", width: 150, sortable: true },
     { field: "status", headerName: "Status", width: 150 },
     {
+      // Actions column with Edit and Delete buttons
       field: "actions",
       headerName: "Actions",
       width: 180,
       renderCell: (params) => (
         <Box>
+          {/* Edit button */}
           <Button
             size="small"
             onClick={() => {
               setSelectedPost(params.row);
-              setOpenDialog(true);
+              setOpenDialog(true); 
             }}
           >
             Edit
           </Button>
+
+          {/* Delete button */}
           <Button
             size="small"
             color="error"
             onClick={() => {
-              setSelectedPost(params.row);
-              setOpenDelete(true);
+              setSelectedPost(params.row); // set the post to delete
+              setOpenDelete(true); // open delete confirmation
             }}
           >
             Delete
@@ -86,17 +101,11 @@ function JobTableComponent() {
     },
   ];
 
-  function CustomToolbar() {
-    return (
-      <GridToolbarContainer>
-        <GridToolbarExport />
-      </GridToolbarContainer>
-    );
-  }
-  return (
+ 
 
-    // main table 
+  return (
     <Box>
+      {/* Search input for filtering posts */}
       <input
         placeholder="Search by Title or Author"
         value={search}
@@ -106,42 +115,35 @@ function JobTableComponent() {
           padding: "15px",
           width: "100%",
           boxSizing: "border-box",
-          border: '1px solid #efefef',
-          borderRadius: '5px'
+          border: "1px solid #efefef",
+          borderRadius: "5px",
         }}
       />
 
-
-      {/* button to add a new Post */}
+      {/* Button to add a new post */}
       <Button
         variant="contained"
         onClick={() => {
-          setSelectedPost(null);
-          setOpenDialog(true);
+          setSelectedPost(null); 
+          setOpenDialog(true); 
         }}
         style={{ marginBottom: "15px", marginTop: "10px" }}
       >
         Add Post
       </Button>
 
-
-
+      {/* DataGrid to display blog posts */}
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={filteredPosts}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}
-          disableSelectionOnClick
-          components={{
-            Toolbar: CustomToolbar,
-          }}
+          disableSelectionOnClick 
         />
       </div>
 
-
-      {/* Component to edit the post */}
-
+      {/* Component to edit/add a post */}
       <EditPostComponent
         open={openDialog}
         setOpen={setOpenDialog}
@@ -149,9 +151,7 @@ function JobTableComponent() {
         setPosts={setPosts}
       />
 
-
-      {/* Component to delete the post */}
-
+      {/* Component to delete a post */}
       <DeleteDialogComponent
         open={openDelete}
         setOpen={setOpenDelete}
@@ -161,4 +161,5 @@ function JobTableComponent() {
     </Box>
   );
 }
-export default JobTableComponent
+
+export default JobTableComponent;
