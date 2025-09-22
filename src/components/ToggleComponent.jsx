@@ -4,6 +4,9 @@ import { Container } from "@mui/material";
 
 function ToggleComponent({ mode, setMode }) {
     return (
+
+        // DashBoard
+        
         <div style={{ marginTop: "20px", marginBottom: "20px" }}>
 
             <Container sx={{ flex: 1 }}>

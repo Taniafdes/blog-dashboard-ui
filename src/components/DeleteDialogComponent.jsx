@@ -8,6 +8,9 @@ function DeleteDialogComponent({ open, setOpen, post, setPosts }) {
   };
 
   return (
+
+    // Delete Post Component
+
     <Dialog open={open} onClose={() => setOpen(false)}>
       <DialogTitle>Are you sure you want to delete this post?</DialogTitle>
       <DialogActions>

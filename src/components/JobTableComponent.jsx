@@ -5,22 +5,22 @@ import {
   GridToolbarExport,
 } from "@mui/x-data-grid";
 import { Button, Box } from "@mui/material";
-import BlogDialogComponent from "./BlogDialogComponent";
+import EditPostComponent from "./EditPostComponent";
 import DeleteDialogComponent from "./DeleteDialogComponent";
 
 const initialPosts = [
   {
     id: 1,
     title: "My First Post",
-    author: "Temra",
+    author: "Temra Fernandes",
     date: "2025-09-21",
     status: "Published",
     content: "This is the content of the first post.",
   },
   {
     id: 2,
-    title: "Another Post",
-    author: "Jane Smith",
+    title: "My Second Post",
+    author: "Tania Fernandes",
     date: "2025-09-20",
     status: "Draft",
     content: "Content of the second post.",
@@ -53,7 +53,7 @@ function JobTableComponent() {
   const columns = [
     { field: "title", headerName: "Title", width: 200, sortable: true },
     { field: "author", headerName: "Author", width: 150 },
-    {field: "content", headerName: "Content", width: 300},
+    { field: "content", headerName: "Content", width: 300 },
     { field: "date", headerName: "Date", width: 150, sortable: true },
     { field: "status", headerName: "Status", width: 150 },
     {
@@ -94,6 +94,8 @@ function JobTableComponent() {
     );
   }
   return (
+
+    // main table 
     <Box>
       <input
         placeholder="Search by Title or Author"
@@ -108,6 +110,9 @@ function JobTableComponent() {
           borderRadius: '5px'
         }}
       />
+
+
+      {/* button to add a new Post */}
       <Button
         variant="contained"
         onClick={() => {
@@ -118,6 +123,9 @@ function JobTableComponent() {
       >
         Add Post
       </Button>
+
+
+
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={filteredPosts}
@@ -131,12 +139,18 @@ function JobTableComponent() {
         />
       </div>
 
-      <BlogDialogComponent
+
+      {/* Component to edit the post */}
+
+      <EditPostComponent
         open={openDialog}
         setOpen={setOpenDialog}
         post={selectedPost}
         setPosts={setPosts}
       />
+
+
+      {/* Component to delete the post */}
 
       <DeleteDialogComponent
         open={openDelete}

@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from "@mui/material";
 
-function BlogDialogComponent({ open, setOpen, post, setPosts }) {
+function EditPostComponent({ open, setOpen, post, setPosts }) {
   const [form, setForm] = useState({
     title: "",
     author: "",
@@ -42,6 +42,9 @@ function BlogDialogComponent({ open, setOpen, post, setPosts }) {
   };
 
   return (
+    
+    // Edit Post Component
+
     <Dialog open={open} onClose={() => setOpen(false)}>
       <DialogTitle>{post ? "Edit Post" : "Add Post"}</DialogTitle>
       <DialogContent>
@@ -89,4 +92,4 @@ function BlogDialogComponent({ open, setOpen, post, setPosts }) {
   );
 }
 
-export default BlogDialogComponent
+export default EditPostComponent
